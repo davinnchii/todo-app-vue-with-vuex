@@ -1,0 +1,26 @@
+{
+  "name": "vue-project",
+  "version": "0.0.0",
+  "homepage": "https://davinnchii.github.io/todo-app-vue-with-vuex/",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint vue-project --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "dependencies": {
+    "vue": "^3.3.4",
+    "vuex": "^4.1.0",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "gh-pages": "^6.0.0",
+    "vite": "^4.4.11"
+  }
+}
