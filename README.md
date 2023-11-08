@@ -2,6 +2,8 @@
 
 A simple project to track your daily(or not) tasks using Vue3 Composition API and Vuex, according to https://todomvc.com/
 
+#### DEMO: [Preview](https://davinnchii.github.io/todo-app-vue-with-vuex/)
+
 ## Usage
 
 Clone the repository and run `npm install` to install all necessary dependencies.
