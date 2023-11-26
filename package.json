@@ -11,7 +11,9 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "@mdi/js": "^7.3.67",
     "vue": "^3.3.4",
+    "vuetify": "^3.4.3",
     "vuex": "^4.1.0",
     "vuex-persistedstate": "^4.1.0"
   },
