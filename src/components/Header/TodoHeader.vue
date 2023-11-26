@@ -1,13 +1,13 @@
 <script setup>
-import { mdiAccount, mdiAlertCircle } from "@mdi/js";
+const props = defineProps({
+onError: Function,
+})
 
-const errorIcon = { mdiAlertCircle }
 
 import { ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-const hasError = ref(false);
 const newTodoTitle = ref('');
 
 function handleAddTodo(newTodoTitle) {
@@ -24,11 +24,7 @@ function handleAddTodo(newTodoTitle) {
 function handleSubmit(event) {
   event.preventDefault();
   if (!newTodoTitle.value.trim()) {
-    hasError.value = true;
-
-    setTimeout(() => {
-      hasError.value = false;
-    }, 3000)
+    props.onError(true);
 
     return;
   }
@@ -53,25 +49,6 @@ function handleSubmit(event) {
       />
     </form>
   </header>
-  <Transition>
-    <v-alert
-        v-if="hasError"
-        closable
-        text="Todo can't be empty!"
-        type="error"
-        variant="tonal"
-    />
-  </Transition>
 </template>
-
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
+<style>
 </style>
