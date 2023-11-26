@@ -61,5 +61,7 @@ function removeCompleted() {
 </template>
 
 <style scoped>
-
+.footer {
+  box-sizing: content-box;
+}
 </style>

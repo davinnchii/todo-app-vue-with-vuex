@@ -5,7 +5,6 @@ import { useStore } from "vuex";
 
 const store = useStore();
 const editedTodo = ref();
-const newTodoTitle = ref();
 
 const props = defineProps({
   filterParam: String,
@@ -26,12 +25,11 @@ let beforeEditCache = '';
 function handleEditTodo(todo) {
   beforeEditCache = todo.title;
   editedTodo.value = todo;
-  newTodoTitle.value = todo.title
 }
 
-function handleCancelEdit() {
+function handleCancelEdit(todo) {
   editedTodo.value = null;
-  newTodoTitle.value = beforeEditCache;
+  todo.title = beforeEditCache;
 }
 
 function handleRemoveTodo(todo) {
@@ -39,15 +37,16 @@ function handleRemoveTodo(todo) {
 }
 
 function handleDoneEdit(todo) {
-  if (editedTodo.value && editedTodo.value !== beforeEditCache) {
+  if (editedTodo.value && !todo.title.trim()) {
+    handleRemoveTodo(todo);
     editedTodo.value = null;
-    store.dispatch('editTodo', { todo, title: newTodoTitle.value.trim() })
-    newTodoTitle.value = '';
   }
 
-  if (!newTodoTitle.value) {
-    handleRemoveTodo(todo);
+  if (editedTodo.value && todo.title.trim() !== beforeEditCache) {
+    store.dispatch('editTodo', { todo, title: todo.title.trim() });
+    editedTodo.value = null;
   }
+
 }
 
 function checkTodo(todo) {
@@ -94,7 +93,7 @@ function checkTodo(todo) {
             v-if="todo === editedTodo"
             type="text"
             class="edit"
-            v-model="newTodoTitle"
+            v-model="todo.title"
             @keyup.esc="handleCancelEdit(todo)"
             @keydown.enter="handleDoneEdit(todo)"
             @blur="handleDoneEdit(todo)"
@@ -103,7 +102,5 @@ function checkTodo(todo) {
     </ul>
   </section>
 </template>
-
 <style scoped>
-
 </style>
